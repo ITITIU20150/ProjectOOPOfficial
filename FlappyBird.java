@@ -33,3 +33,30 @@ public class FlappyBird implements ActionListener, KeyListener {
     public static void main(String[] args) {
         new FlappyBird().go();
     }
+@Override
+    public void actionPerformed(ActionEvent e) {
+        panel.repaint();
+        if(!pause) {
+            bird.physics();
+            if (scroll % 90 == 0) {
+                Rectangle r = new Rectangle(WIDTH, 0, GamePanel, PIPE_W, (int) ((MATH.random()*HEIGHT)/5f + (0.2f)*HEIGHT));
+                int h2 = (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT);
+                Rectangle r2 = new Rectangle(WIDTH, HEIGHT - h2, GamePanel.PIPE_W, h2);
+                rects.add(r);
+                rects.add(r);
+            }
+            ArrayList<Rectangle> toRemove = new ArrayList<Rectangle>();
+            boolean game = true;
+            for(Rectangle r : rects) {
+                r.x=3;
+                if(r.x + r.width <= 0) {
+                    roRemove.add(r);
+                }
+                if(r.contain(bird.x, bird.y)) {
+                    JOptionPanel.showMessageDialog(frame, "You lose!!!\n" + "Your score:" + time + ".";
+                    game = false;
+                }
+            }
+            rects.removeAll(toRemove);
+            time++;
+            scroll++;
